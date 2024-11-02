@@ -157,4 +157,7 @@ HighywayEnv: A minimalist environment for decision-making in autonomous driving
 https://github.com/Farama-Foundation/HighwayEnv
 
 
+Gymnasium: An API standard for single-agent reinforcement learning environments, with popular reference environments and related utilities (formerly Gym) https://github.com/Farama-Foundation/Gymnasium
+
+
 ## Open Source Data
