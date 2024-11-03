@@ -137,6 +137,12 @@ DriveVLM: The Convergence of Vision and Language Models for Autonomous Driving (
 The Waymo Open Sim Agents Challenge
 https://arxiv.org/abs/2305.12032
 
+End-to-end Autonomous Driving: Challenges and Frontiers
+https://arxiv.org/abs/2306.16927
+
+End-to-End Autonomous Driving in CARLA: A Survey
+https://ieeexplore.ieee.org/document/10704612
+
 
 https://www.jiqizhixin.com/articles/2023-12-18-4
 
