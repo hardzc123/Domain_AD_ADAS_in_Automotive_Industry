@@ -67,12 +67,12 @@ def exportThoughts(self):
             raise ValueError("Expected ':' in the last memory entry.")
         output['thoughts'], output['answer'] = last_memory.split(':', 1)
         return output
-    # def exportThoughts(self):
-    #     print("Debug: self.ch.memory =", self.ch.memory)
-    #     output = {}
-    #     output['thoughts'], output['answer'] = self.ch.memory[-1].split(
-    #         'Final Answer:')
-    #     return output
+# def exportThoughts(self):
+#     print("Debug: self.ch.memory =", self.ch.memory)
+#     output = {}
+#     output['thoughts'], output['answer'] = self.ch.memory[-1].split(
+#         'Final Answer:')
+#     return output
 
 ```
 
