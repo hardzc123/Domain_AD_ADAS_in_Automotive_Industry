@@ -50,6 +50,102 @@ Challenges to perception:
    - Synchronization: (synchronize different modules and provide a common clock) (GPS can be a reference clock, because it relies on extremely accurate timing to function )
 
 
+## GNSS / IMU
+SwiftNav Platform Runable:
+
+- GNSS Receiver -> GNSS Measurement -> GNSS Engine ->
+- Correction Provider (Skylark Cloud Correction Service) -> GNSS Correction -> GNSS Engine -> PTV data (Position, Velocity, Time) -> Fution Engine ->
+- Vehicle Sensors (IMU, Wheel Odometry) -> Fusion Engine -> PVAT data  ( Position, Velocity, Attitude and Time)
+
+for GNSS Engine
+- Observation: Incoming data (i.e. observations, ephemerides and corrections) can be provided in RTCM v3, SBP or
+UBX formats. Output data can be generated in either SBP or NMEA 0183 formats.
+  - RTCM v3:
+  - SBP
+  - UBX
+  - NMEA 0183
+- Correction: The GNSS Engine is capable of receiving correction data in either Observation State Representation
+(OSR) or State Space Representation (SSR) formats.
+
+
+The Fusion Engine needs to perform an alignment procedure before it can provide positioning
+assistance to the system. The alignment process will begin once the following conditions are met
+
+
+The minimum vehicle sensor input required by the Fusion Engine is a single 6 DoF IMU. The optional
+Wheel Odometry input can be used to constrain error growth when operating in pure **dead
+reckoning** mode, e.g. when driving through tunnels. Wheel Odometry input may be provided as
+either an on-ground speed value (using MSG_ODOMETRY) or as a number of wheel ticks (using
+MSG_WHEELTICK).
+- Dead Reckoning (DR) is a navigation technique used to estimate the current position of an object (such as a vehicle or a person) based on a previously known position and estimated movements over time. This technique relies on continuously updated data about direction, speed, time, and sometimes altitude or depth to calculate the current position without needing to rely on external signals like GPS.
+
+Key Components of Dead Reckoning:
+
+	1.	Starting Point: Known initial position.
+	2.	Direction: The direction of movement, often provided by a compass or gyroscope.
+	3.	Speed/Velocity: The speed or velocity of movement, which can be obtained from speedometers or accelerometers.
+	4.	Elapsed Time: The amount of time that has passed since the last known position.
+
+How Dead Reckoning Works:
+
+In dead reckoning, the current position is calculated by taking the last known position and adjusting it based on the distance traveled and direction since that point. This adjustment is repeated continuously to keep updating the current position estimate.
+
+For example:
+
+	1.	A vehicle starts at a known position.
+	2.	Based on the vehicle’s direction, speed, and time elapsed, the system estimates the new position by calculating where the vehicle should be if it traveled in that direction at that speed for that period.
+
+Applications:
+
+Dead reckoning is commonly used in:
+
+	•	Marine Navigation: Ships use dead reckoning when they cannot get GPS signals, such as in fjords or near tall structures that block signals.
+	•	Aviation: Aircraft use dead reckoning as a backup or when flying over regions where GPS or other navigation signals are unavailable.
+	•	Automotive and Robotics: Dead reckoning is used in autonomous vehicles, drones, and robots as part of their navigation systems, especially in environments with weak or no GPS signals, like tunnels or indoor spaces.
+	•	Pedestrian Navigation: It can be used in smartphones and wearables to provide position tracking when GPS signals are unavailable, such as inside buildings.
+
+Limitations:
+
+	1.	Accumulated Error: Small errors in measuring speed, direction, or time can accumulate over time, leading to significant inaccuracies.
+	2.	Lack of External Correction: Since dead reckoning doesn’t use external signals (like GPS) for correction, errors can grow over distance and time.
+	3.	Dependence on Sensor Accuracy: The technique relies heavily on the accuracy of onboard sensors, like accelerometers, gyroscopes, and magnetometers.
+
+Enhancing Dead Reckoning:
+
+Dead reckoning is often combined with other methods to improve accuracy, such as:
+
+	•	GPS (when available): Dead reckoning can fill gaps when GPS is temporarily lost.
+	•	IMU (Inertial Measurement Unit): Using accelerometers and gyroscopes to improve movement tracking.
+	•	SLAM (Simultaneous Localization and Mapping) in robotics: Dead reckoning data is combined with sensor data like lidar or cameras to reduce errors and maintain accuracy in mapping and navigation.
+
+In summary, dead reckoning is an effective and useful method for estimating location in situations where GPS is unavailable or unreliable, although it is susceptible to accumulated error without external corrections.
+
+
+----
+
+With the default configuration, alignment should typically complete within a distance of 20 to 50 m
+if **sky visibility ** remains good during the initialisation phase.
+
+The Fast Start feature allows the state of the Fusion Engine to be persistently stored while Starling is
+not active. This enables the Fusion Engine to enter an aligned state immediately after Starling is
+started without needing to follow the alignment process outlined above.
+
+These are referred to as endpoints. Each endpoint can be configured to use a given protocol. The
+supported protocols are as follows:
+● ixcom: Binary protocol supported by products from iMAR Navigation & Control; can be
+used for IMU and wheel tick input only.
+● nmea: NMEA 0183 ASCII sentences as defined in [NMEA]; can be used for position output
+only.
+● ntrip: Networked Transport of RTCM via Internet Protocol; can be used for correction
+input only.
+● rtcm: Version 3.2 of the RTCM standard as defined in [RTCM3]; can be used for GNSS
+measurement and correction input only.
+● sbp: Swift Binary Protocol as defined in [SBP]; can be used for all inputs and outputs.
+● ubx: u-blox UBX Protocol (v27.11 or higher) as defined in [F9P]; can be used for GNSS and
+IMU input only
+
+- DR（Dead Reckoning）： 
+
 ## Senarios and requirements for hardware (sensors) and software
 | reference: https://repository.tudelft.nl/file/File_ef45c131-fb7f-409a-a275-1f3bff100fb5?preview=1
 
