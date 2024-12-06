@@ -1,3 +1,27 @@
+# CPU Architecture
+## What CPU Architecture we have right now?
+Traditional X86 Architecture -> Intel, AMD
+ARM Architecture -> Apple M, Huawei Hislicon, TI TDAx family
+RISC-V Architecture -> Tesla Dojo
+MIPS Architecture 
+
+
+## Cross-compiling
+Why cross-compiling? 
+
+How cross-compiling?
+
+
+
+# TODO
+GPU architecure -> Nvidia
+
+TI’s TDAx family of SoCs is designed for ADAS applications, specifically the TDA4AP-Q1, TDA4VP-Q1, TDA4AH-Q1, and TDA4VH-Q1
+    •	Real-time sensor data processing
+	•	ISO26262 compliance up to ASIL D
+
+
+
 # Apple M chips architecture
 ![alt text](image.png)
 
